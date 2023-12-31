@@ -68,6 +68,12 @@ class _SideMenuState extends State<SideMenu> {
 
   screnSelectore(item) {
     switch (item.route) {
+      case DashboardScreen.id:
+        setState(() {
+          _selectedScreen = DashboardScreen();
+        });
+
+        break;
       case CategoryScreen.id:
         setState(() {
           _selectedScreen = CategoryScreen();
@@ -88,12 +94,12 @@ class _SideMenuState extends State<SideMenu> {
 
         break;
 
-      case WithrawalScreen.id:
-        setState(() {
-          _selectedScreen = WithrawalScreen();
-        });
+      // case WithrawalScreen.id:
+      //   setState(() {
+      //     _selectedScreen = WithrawalScreen();
+      //   });
 
-        break;
+      //   break;
 
       case OrderScreen.routeName:
         setState(() {
@@ -143,6 +149,11 @@ class _SideMenuState extends State<SideMenu> {
       ),
       sideBar: SideBar(
         items: const [
+            AdminMenuItem(
+            title: 'Dashboard',
+            route: DashboardScreen.id,
+            icon: CupertinoIcons.person_3,
+          ),
           AdminMenuItem(
             title: 'Vendors',
             route: VendorsScreen.id,
@@ -153,11 +164,11 @@ class _SideMenuState extends State<SideMenu> {
             route: BuyersScreen.id,
             icon: CupertinoIcons.person,
           ),
-          AdminMenuItem(
-            title: 'Withdrawal',
-            route: WithrawalScreen.id,
-            icon: CupertinoIcons.money_dollar,
-          ),
+          // AdminMenuItem(
+          //   title: 'Withdrawal',
+          //   route: WithrawalScreen.id,
+          //   icon: CupertinoIcons.money_dollar,
+          // ),
           AdminMenuItem(
             title: 'Orders',
             route: OrderScreen.routeName,

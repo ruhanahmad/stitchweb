@@ -82,7 +82,7 @@ bool _isLoading = false;
                                 color: Colors.white,
                               )
                             : Text(
-                                'Add Product',
+                                'Add Category',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 19,
