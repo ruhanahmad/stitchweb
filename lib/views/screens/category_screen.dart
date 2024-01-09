@@ -71,10 +71,37 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Form(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          height: 300,
+          width: 500,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Category',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                  ),
+                ),
+              ),
+              SizedBox(
+            height: 15,
+          ),
+          Expanded(child: CategoryListWidget()),
+            ],
+          ),
+        ),
+        SizedBox(width: 20,),
+        Container(
+          width: 600,
+          height: 300,
+          child: Form(
             key: _formKey,
             child: Column(
               children: [
@@ -89,103 +116,169 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                   ),
                 ),
-                Divider(
-                  color: Colors.grey,
+                // Divider(
+                //   color: Colors.grey,
+                // ),
+                     Table(
+             border: TableBorder.all(),
+            children:[
+           TableRow(
+              children: [
+                TableCell(
+                  child: Center(child: Text('Sr')),
                 ),
-                Row(
-                  children: [
-                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance.collection('cat').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text('Error: ${snapshot.error}'),
-          );
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-
-        List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
-            snapshot.data!.docs;
-
-        return Container(
-          height: 200,
-          width: 1100,
-          
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemCount: documents.length,
-            itemBuilder: (context, index) {
-              var ids = documents[index].id;
-              var data = documents[index].data();
-              return 
-                Container(
-                height: 80,
-                width: 120,
-                decoration: BoxDecoration(color: Colors.amber),
-                margin: EdgeInsets.all(8.0),
-                child: ListTile(
-          title: Text(data["name"]),
-                trailing:      IconButton(
-                                          icon: Icon(Icons.delete),
-                                          onPressed: () async {
-                                            try {
-                                              await FirebaseFirestore.instance
-                                                  .collection("cat")
-                                                  .doc(ids)
-                                                  .delete();
-                                            } catch (e) {
-                                              print(
-                                                  'Error deleting document: $e');
-                                            }
-                                            // Call your Firebase delete function or use a service class
-                                            // to handle the deletion of the task
-                                            // Example: FirebaseService.deleteTask(task.id);
-                                          },
-                                        ), 
+                TableCell(
+                  child: Center(child: Text('Name')),
                 ),
-              );
-              // FlutterCard(
-              //   title: data['name'],
-              //   id:ids
-               
-              // );
-            },
-          ),
-        );
-      },
-    ),
              
-                  ],
+               
+      
+                TableCell(
+                  child: Center(child: Text('Del')),
                 ),
-                Divider(
-                  color: Colors.grey,
-                )
+              ],
+            ),
+            ]
+            
+            
+            ),
+            SizedBox(width: 10,),
+                StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                                stream: FirebaseFirestore.instance.collection('cat').snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          );
+                                  }
+                          
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                                  }
+                          
+                                  List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
+                            snapshot.data!.docs;
+                          
+                                  return
+                                   Expanded(
+                                     child: ListView.builder(
+                                       shrinkWrap: true,
+                                       scrollDirection: Axis.vertical,
+                                       itemCount: documents.length,
+                                       itemBuilder: (context, index) {
+                                         var ids = documents[index].id;
+                                         var data = documents[index].data();
+                                         return 
+                                     
+                                                         Center(
+                                                           child: 
+                                                           Table(
+                                                             border: TableBorder.all(),
+                                                             children: [
+                                                              
+                                     TableRow(
+                                       children: [
+                                         TableCell(
+                                                      child: Center(child: Text('${index}')),
+                                         ),
+                                         TableCell(
+                                                      child: Center(child: Text(data["name"])),
+                                         ),
+                                         
+                                           TableCell(
+                                                      child: Center(child:  
+                                                       IconButton(
+                                           icon: Icon(Icons.delete),
+                                           onPressed: () async {
+                                             try {
+                                               await FirebaseFirestore.instance
+                                                   .collection("cat")
+                                                   .doc(ids)
+                                                   .delete();
+                                             } catch (e) {
+                                               print(
+                                                   'Error deleting document: $e');
+                                             }
+                                             // Call your Firebase delete function or use a service class
+                                             // to handle the deletion of the task
+                                             // Example: FirebaseService.deleteTask(task.id);
+                                           },
+                                         ), ),
+                                         ),
+                                                     // TableCell(
+                                                     //  child: Center(child:  
+                                                     //   IconButton(
+                                                     //                 icon: Icon(Icons.delete),
+                                                     //                 onPressed: () async {
+                                                     //                   try {
+                                                     //                     await FirebaseFirestore.instance
+                                                     //                         .collection("buyers")
+                                                     //                         .doc(ids)
+                                                     //                         .delete();
+                                                     //                   } catch (e) {
+                                                     //                     print(
+                                                     //                         'Error deleting document: $e');
+                                                     //                   }
+                                                     //                   // Call your Firebase delete function or use a service class
+                                                     //                   // to handle the deletion of the task
+                                                     //                   // Example: FirebaseService.deleteTask(task.id);
+                                                     //                 },
+                                                     //               ), ),
+                                                     //               ),
+                                       ],
+                                     ),
+                                     
+                                                             ],
+                                                           ),
+                                                         );
+                                     //       Container(
+                                     //       height: 80,
+                                     //       width: 120,
+                                     //       decoration: BoxDecoration(color: Colors.amber),
+                                     //       margin: EdgeInsets.all(8.0),
+                                     //       child: ListTile(
+                                     // title: Text(data["name"]),
+                                     //       trailing:      IconButton(
+                                     //             icon: Icon(Icons.delete),
+                                     //             onPressed: () async {
+                                     //               try {
+                                     //                 await FirebaseFirestore.instance
+                                     //                     .collection("cat")
+                                     //                     .doc(ids)
+                                     //                     .delete();
+                                     //               } catch (e) {
+                                     //                 print(
+                                     //                     'Error deleting document: $e');
+                                     //               }
+                                     //               // Call your Firebase delete function or use a service class
+                                     //               // to handle the deletion of the task
+                                     //               // Example: FirebaseService.deleteTask(task.id);
+                                     //             },
+                                     //           ), 
+                                     //       ),
+                                     //     );
+                                         // FlutterCard(
+                                         //   title: data['name'],
+                                         //   id:ids
+                                          
+                                         // );
+                                       },
+                                     ),
+                                   );
+                                },
+                              ),
+                // Divider(
+                //   color: Colors.grey,
+                // )
               ],
             ),
           ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              'Category',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 36,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          CategoryListWidget(),
-        ],
-      ),
+        ),
+        
+        
+      ],
     );
   }
 }

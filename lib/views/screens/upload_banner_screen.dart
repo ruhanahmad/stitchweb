@@ -309,9 +309,11 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
         
                 GestureDetector(
                   onTap: ()async {
- 
+ if(_formKey.currentState!.validate()){
   addServices(title, description,  price, _image);
+ }
                   // }
+
       // print(documents.first["inOut"]);
      
                 

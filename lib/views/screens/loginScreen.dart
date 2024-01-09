@@ -175,23 +175,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Need An Account?'),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return BuyerRegisterScreen();
-                      })));
-                    },
-                    child: Text(
-                      'Register',
-                    ),
-                  ),
-                ],
-              )
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text('Need An Account?'),
+              //     TextButton(
+              //       onPressed: () {
+              //         Navigator.push(context,
+              //             MaterialPageRoute(builder: ((context) {
+              //           return BuyerRegisterScreen();
+              //         })));
+              //       },
+              //       child: Text(
+              //         'Register',
+              //       ),
+              //     ),
+              //   ],
+              // )
             ],
           ),
         ),

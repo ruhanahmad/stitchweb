@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'StitchNow Web Admin Pannel',
       theme: ThemeData(
@@ -160,7 +160,7 @@ class _SideMenuState extends State<SideMenu> {
             icon: CupertinoIcons.person_3,
           ),
           AdminMenuItem(
-            title: 'Buyers',
+            title: 'Customers',
             route: BuyersScreen.id,
             icon: CupertinoIcons.person,
           ),
@@ -180,7 +180,7 @@ class _SideMenuState extends State<SideMenu> {
             route: CategoryScreen.id,
           ),
           AdminMenuItem(
-            title: 'Upload Banner',
+            title: 'Add Product',
             icon: CupertinoIcons.add,
             route: UploadBanners.id,
           ),
@@ -211,19 +211,7 @@ class _SideMenuState extends State<SideMenu> {
             ),
           ),
         ),
-        footer: Container(
-          height: 50,
-          width: double.infinity,
-          color: const Color(0xff444444),
-          child: const Center(
-            child: Text(
-              '@RuhanAhmad',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
+     
       ),
       body: _selectedScreen,
     );

@@ -9,7 +9,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int totalSales = 0;
+  double totalSales = 0.0;
   int totalCustomers = 0;
   int totalVendors = 0;
 
@@ -24,14 +24,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> fetchTotalSales() async {
     QuerySnapshot ordersSnapshot = await FirebaseFirestore.instance.collection('orders').get();
 
-    int total = 0;
+    double total = 0.0;
     for (QueryDocumentSnapshot doc in ordersSnapshot.docs) {
-      total += int.parse(doc['total']) ?? 0;
+      total += double.parse(doc['total']) ?? 0;
     }
 
     setState(() {
       totalSales = total;
     });
+    print("${totalSales}" + "kjhkjhkjhkjhkjhkjhkjhkj");
   }
 
   Future<void> fetchTotalCustomers() async {
@@ -62,63 +63,75 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         title: Text('Dashboard'),
       ),
-      body: Column(
+      body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Sales',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '\$$totalSales',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
-                  ),
-                ],
+          Container(
+            width: 200,
+            height: 140,
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Total Sales',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '\$$totalSales',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Customers',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '$totalCustomers',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
-                  ),
-                ],
+          Container(
+             width: 200,
+            height: 140,
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Total Customers',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '$totalCustomers',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Vendors',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '$totalVendors',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.orange),
-                  ),
-                ],
+          Container(
+             width: 200,
+            height: 140,
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Total Vendors',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '$totalVendors',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.orange),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
